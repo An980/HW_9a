@@ -56,7 +56,7 @@ public class RadioTest {
         Assertions.assertEquals(expected, actual);
     }
 
-    @Test//переключение станции выше лимита (переключение на первую)
+    @Test//переключение на след. станцию (выше лимита)
     public void nextStationSelectMax() {
         Radio radio = new Radio();
 
@@ -69,7 +69,20 @@ public class RadioTest {
         Assertions.assertEquals(expected, actual);
     }
 
-    @Test//переключение станции вперед
+    @Test///переключение на след. станцию (граничное)
+    public void nextStationSelectBoundary() {
+        Radio radio = new Radio();
+
+        radio.setCurrentStat(8);
+        radio.nextStationSelect();
+
+        int expected = 9;
+        int actual = radio.getCurrentStat();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test///переключение на пред. станцию
     public void prevStationSelect() {
         Radio radio = new Radio();
 
@@ -82,14 +95,27 @@ public class RadioTest {
         Assertions.assertEquals(expected, actual);
     }
 
-    @Test//переключение станции ниже лимита (переключение на последнюю)
+    @Test//переключение на пред. станцию (ниже лимита)
     public void prevStationSelectMin() {
         Radio radio = new Radio();
 
-        radio.setCurrentStat(0);
+        radio.setCurrentStat(-1);
         radio.prevStationSelect();
 
         int expected = 9;
+        int actual = radio.getCurrentStat();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test//переключение на пред. станцию (граничное)
+    public void prevStationSelectBoundary() {
+        Radio radio = new Radio();
+
+        radio.setCurrentStat(1);
+        radio.prevStationSelect();
+
+        int expected = 0;
         int actual = radio.getCurrentStat();
 
         Assertions.assertEquals(expected, actual);
@@ -196,11 +222,11 @@ public class RadioTest {
         Assertions.assertEquals(expected, actual);
     }
 
-    @Test//умуньшение громкости
+    @Test//умуньшение громкости (ниже лимита)
     public void decreaseVolBelowMin() {
         Radio radio = new Radio();
 
-        radio.setCurrentVol(0);
+        radio.setCurrentVol(-1);
         radio.decreaseVolume();
 
         int expected = 0;
@@ -209,4 +235,3 @@ public class RadioTest {
         Assertions.assertEquals(expected, actual);
     }
 }
-

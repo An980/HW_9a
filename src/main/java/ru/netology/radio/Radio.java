@@ -27,12 +27,20 @@ public class Radio {
     }
 
     public void nextStationSelect() {
-        currentStat = currentStat + 1;
+        currentStat++;
         if (currentStat > 9) {
             currentStat = 0;
         }
     }
 
+    public void prevStationSelect() {
+        currentStat--;
+        if (currentStat < 0) {
+            currentStat = 9;
+        }
+    }
+
+     /*  косячный метод
     public void prevStationSelect() {
         if (currentStat > 0) {
             currentStat = currentStat - 1;
@@ -41,6 +49,8 @@ public class Radio {
             currentStat = 9;
         }
     }
+      */
+
 
     //--------------------------------------Volume methods--------------------------------------//
 
