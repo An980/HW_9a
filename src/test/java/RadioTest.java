@@ -26,18 +26,18 @@ public class RadioTest {
 
     @Test//установка текущей станции
     public void radioSetCurrentStation() {
-        Radio radio = new Radio(30);
-        radio.setCurrentStat(15);
+        Radio radio = new Radio(20);
+        radio.setCurrentStat(5);
 
-        Assertions.assertEquals(15, radio.getCurrentStat());
+        Assertions.assertEquals(5, radio.getCurrentStat());
     }
 
     @Test//установка текущей станции ниже лимита
     public void radioSetCurrentStationBelowMin() {
-        Radio radio = new Radio(30);
+        Radio radio = new Radio();
         radio.setCurrentStat(-1);
 
-        Assertions.assertEquals(29, radio.getCurrentStat());
+        Assertions.assertEquals(9, radio.getCurrentStat());
     }
 
     @Test//установка текущей станции выше лимита
