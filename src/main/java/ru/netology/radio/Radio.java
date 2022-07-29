@@ -1,78 +1,101 @@
 package ru.netology.radio;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+
 public class Radio {
 
-    private int currentVol;
-    private int currentStat;
+    private int minStat = 0;
+    private int maxStat = 9;
+    private int currentStat = minStat;
+    private int minVol = 0;
+    private int maxVol = 100;
+    private int currentVol = minVol;
 
-    public int getCurrentVol() {
-        return currentVol;
+    public Radio(int sizeStat) { //заказные параметры радио
+        maxStat = minStat + sizeStat - 1;
+    }
+
+/* lombok generated
+    public int getMinStat() {
+        return minStat;
+    }
+
+    public int getMaxStat() {
+        return maxStat;
     }
 
     public int getCurrentStat() {
         return currentStat;
     }
 
+    public int getMinVol() {
+        return minVol;
+    }
 
-    //--------------------------------------Station methods--------------------------------------//
+    public int getMaxVol() {
+        return maxVol;
+    }
+
+    public int getCurrentVol() {
+        return currentVol;
+    }
+
+ */
+
+//--------------------------------------Station methods--------------------------------------//
+
 
     public void setCurrentStat(int newCurrentStat) {
-        if (newCurrentStat < 0) {
+        if (newCurrentStat < minStat) {
+            newCurrentStat = maxStat;
+        }
+        if (newCurrentStat > maxStat) {
             return;
         }
-        if (newCurrentStat > 9) {
-            return;
-        }
-        currentStat = newCurrentStat;
+        this.currentStat = newCurrentStat;
     }
 
     public void nextStationSelect() {
         currentStat++;
-        if (currentStat > 9) {
-            currentStat = 0;
+        if (currentStat > maxStat) {
+            currentStat = minStat;
         }
     }
 
     public void prevStationSelect() {
         currentStat--;
-        if (currentStat < 0) {
-            currentStat = 9;
+        if (currentStat < minStat) {
+            currentStat = maxStat;
         }
     }
-
-     /*  косячный метод
-    public void prevStationSelect() {
-        if (currentStat > 0) {
-            currentStat = currentStat - 1;
-        }
-        if (currentStat == 0) {
-            currentStat = 9;
-        }
-    }
-      */
-
 
     //--------------------------------------Volume methods--------------------------------------//
 
     public void setCurrentVol(int newCurrentVol) {
-        if (newCurrentVol < 0) {
+        if (newCurrentVol < minVol) {
             return;
         }
-        if (newCurrentVol > 10) {
-            return;
+        if (newCurrentVol > maxVol) {
+            newCurrentVol = maxVol;
         }
         currentVol = newCurrentVol;
     }
 
     public int increaseVolume() {
-        if (currentVol < 10) {
+        if (currentVol < maxVol) {
             currentVol = currentVol + 1;
         }
         return currentVol;
     }
 
     public int decreaseVolume() {
-        if (currentVol > 0) {
+        if (currentVol > minVol) {
             currentVol = currentVol - 1;
         }
         return currentVol;
