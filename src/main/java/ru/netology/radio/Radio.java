@@ -21,6 +21,7 @@ public class Radio {
         maxStat = minStat + sizeStat - 1;
     }
 
+/* lombok generated
     public int getMinStat() {
         return minStat;
     }
@@ -44,6 +45,8 @@ public class Radio {
     public int getCurrentVol() {
         return currentVol;
     }
+
+ */
 
 //--------------------------------------Station methods--------------------------------------//
 
